@@ -14,7 +14,7 @@
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <cucumber.jvm.parallel.version>2.2.0</cucumber.jvm.parallel.version>
         <surefire.maven.plugin.version>2.19.1</surefire.maven.plugin.version>
-        <acceptance.test.parallel.count>10</acceptance.test.parallel.count>
+        <acceptance.test.parallel.count>1</acceptance.test.parallel.count>
     </properties>
 
     <dependencies>
@@ -54,7 +54,7 @@
         <dependency>
             <groupId>com.browserstack</groupId>
             <artifactId>browserstack-local-java</artifactId>
-            <version>1.0.0</version>
+            <version>0.3.0</version>
         </dependency>
 
     </dependencies>

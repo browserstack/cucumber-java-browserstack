@@ -1,3 +1,4 @@
-Search_Parallel01IT.class
+Search_Parallel02IT.class
 com/browserstack/pageobjects/SearchPage.class
 com/browserstack/stepdefs/SearchSteps.class
+Local_Parallel01IT.class

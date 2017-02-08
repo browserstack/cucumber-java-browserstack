@@ -1,5 +1,6 @@
 package com.browserstack.stepdefs;
 
+import com.browserstack.local.Local;
 import com.browserstack.pageobjects.SearchPage;
 import cucumber.api.Scenario;
 import cucumber.api.java.After;
@@ -12,12 +13,16 @@ import org.openqa.selenium.remote.DesiredCapabilities;
 import org.openqa.selenium.remote.RemoteWebDriver;
 
 import java.net.URL;
+import java.util.HashMap;
+import java.util.Map;
 
 import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertTrue;
 
 public class SearchSteps {
     private WebDriver driver;
     private SearchPage searchPage;
+    private Local l;
 
     @Before
     public void setUp(Scenario scenario) throws Exception {
@@ -27,6 +32,14 @@ public class SearchSteps {
 
         DesiredCapabilities caps = new DesiredCapabilities();
         caps.setCapability("browser", System.getProperty("browser"));
+
+        if (System.getProperty("local").equals("true")) {
+            caps.setCapability("browserstack.local", "true");
+            l = new Local();
+            Map<String, String> options = new HashMap<String, String>();
+            options.put("key", ACCESS_KEY);
+            l.start(options);
+        }
 
         driver = new RemoteWebDriver(new URL(URL), caps);
         searchPage = new SearchPage(driver);
@@ -48,8 +61,14 @@ public class SearchSteps {
         assertEquals(expectedTitle, driver.getTitle());
     }
 
+    @Then("the page should contain '(.+)'$")
+    public void page_should_contain(String expectedTitle) throws Throwable {
+        assertTrue(driver.getPageSource().contains(expectedTitle));
+    }
+
     @After
     public void teardown() throws Exception {
         driver.quit();
+        if (l != null) l.stop();
     }
 }

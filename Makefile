@@ -5,7 +5,7 @@ clean_it:
 	mvn clean
 
 test_parallel:
-	make -j test_firefox test_ie test_safari test_chrome
+	make -j test_firefox test_ie test_safari test_chrome test_local
 
 test_firefox:
 	mvn install -Dbrowser=firefox
@@ -18,3 +18,6 @@ test_safari:
 
 test_chrome:
 	mvn install -Dbrowser=chrome
+
+test_local:
+    mvn install -Dbrowser=chrome -Dlocal=true
