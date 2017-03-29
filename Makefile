@@ -18,3 +18,6 @@ test_safari:
 
 test_chrome:
 	mvn install -Dbrowser=chrome
+
+test_local:
+    mvn install -Dbrowser=chrome -Dlocal=true
