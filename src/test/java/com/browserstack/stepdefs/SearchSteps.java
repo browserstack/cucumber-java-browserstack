@@ -27,13 +27,13 @@ public class SearchSteps {
     @Before
     public void setUp(Scenario scenario) throws Exception {
         String USERNAME = System.getenv("BROWSERSTACK_USERNAME");
-        String ACCESS_KEY = System.getenv("BROWSERSTACK_ACCESSKEY");
+        String ACCESS_KEY = System.getenv("BROWSERSTACK_ACCESS_KEY");
         String URL = "https://" + USERNAME + ":" + ACCESS_KEY + "@hub.browserstack.com/wd/hub";
 
         DesiredCapabilities caps = new DesiredCapabilities();
         caps.setCapability("browser", System.getProperty("browser"));
 
-        if (System.getProperty("local").equals("true")) {
+        if (System.getProperty("local") != null && System.getProperty("local").equals("true")) {
             caps.setCapability("browserstack.local", "true");
             l = new Local();
             Map<String, String> options = new HashMap<String, String>();
