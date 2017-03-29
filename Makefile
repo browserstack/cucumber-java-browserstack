@@ -5,7 +5,7 @@ clean_it:
 	mvn clean
 
 test_parallel:
-	make -j test_firefox test_ie test_safari test_chrome test_local
+	make -j test_firefox test_ie test_safari test_chrome
 
 test_firefox:
 	mvn install -Dbrowser=firefox
