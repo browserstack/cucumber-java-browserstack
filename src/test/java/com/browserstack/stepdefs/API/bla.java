@@ -1,4 +1,4 @@
-package com.browserstack.stepdefs;
+package com.browserstack.stepdefs.API;
 
 import com.browserstack.local.Local;
 import com.browserstack.pageobjects.SearchPage;
@@ -21,17 +21,13 @@ import java.util.HashMap;
 import java.util.Map;
 
 import static io.restassured.RestAssured.given;
-import static io.restassured.RestAssured.requestSpecification;
-import static io.restassured.RestAssured.responseSpecification;
 import static org.hamcrest.Matchers.containsString;
 import static org.hamcrest.MatcherAssert.*;
 
-/**
- * Created by Lucho on 04/12/2017.
- */
+
 public class bla {
     private WebDriver driver;
-    private SearchPage searchPage;
+    private SearchPage searchPage; // Променлива, идваща от SearchPage class-a, всеки път за нов патърн се прави нова променлива!
     private Local l;
 
     @Before
