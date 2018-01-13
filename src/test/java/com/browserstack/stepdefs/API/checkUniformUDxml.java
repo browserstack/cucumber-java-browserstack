@@ -25,36 +25,7 @@ import static org.hamcrest.Matchers.containsString;
 import static org.hamcrest.MatcherAssert.*;
 
 
-public class bla {
-    private WebDriver driver;
-    private SearchPage searchPage; // Променлива, идваща от SearchPage class-a, всеки път за нов патърн се прави нова променлива!
-    private Local l;
-
-    @Before
-    public void setUp(Scenario scenario) throws Exception {
-        String USERNAME = "ilianavajarova1";
-        String AUTOMATE_KEY = "anQesbpRtAnE2aYhxQxd";
-        String URL = "https://" + USERNAME + ":" + AUTOMATE_KEY + "@hub-cloud.browserstack.com/wd/hub";
-
-        DesiredCapabilities caps = new DesiredCapabilities();
-        caps.setCapability("browser", System.getProperty("browser"));
-        caps.setCapability("browser", "IE");
-        caps.setCapability("browser_version", "6.0");
-        caps.setCapability("os", "Windows");
-        caps.setCapability("os_version", "XP");
-        caps.setCapability("resolution", "1920x1080");
-
-        if (System.getProperty("local") != null && System.getProperty("local").equals("true")) {
-            caps.setCapability("browserstack.local", "false");
-            l = new Local();
-            Map<String, String> options = new HashMap<String, String>();
-            options.put("key", AUTOMATE_KEY);
-            l.start(options);
-        }
-
-        driver = new RemoteWebDriver(new URL(URL), caps);
-        searchPage = new SearchPage(driver);
-    }
+public class checkUniformUDxml {
 
     @Given("^I ams on the website '(.+)'$")
     public void I_ams_on_the_website(String url) throws Throwable {
@@ -68,26 +39,26 @@ public class bla {
 
         // Make a GET request call directly by using RequestSpecification.get() method.
         // Make sure you specify the resource name.
-        Response response1 = httpRequest.get("/UD5a256d96492ec");
+        Response response1 = httpRequest.get(url);
 
-        Response response2 = httpRequest.get("/UD5a268ac5b5ee9");
+        Response response2 = httpRequest.get(url);  // "/UD5a268ac5b5ee9"
 
         // Response.asString method will directly return the content of the body
         // as String.
         System.out.println("Response Body is =>  " + response1.asString() + response2.asString());
-        Assert.assertEquals("Mani mani q da viim", response1.asString(), response2.asString());
+        Assert.assertEquals("The queries should be equal and the same", response1.asString(), response2.asString());
 
     }
 
-    @When("^sss$")
-    public void sss() throws Throwable {
-        given().when().get("http://dev.embodee.com/services/factoryxml/UD5a256d96492ec").then()
+    @When("^Check query content for the right properties '(.+)'$")
+    public void Check_query_content_for_the_right_properties(String url2) throws Throwable {
+        given().when().get(url2).then()
                 .body(containsString("graphic"))
                 .body(containsString("id"));
 
 }
 
-    @Then("^paas$")
+   /* @Then("^paas$")
     public void paas() throws Throwable {
         // Specify the base URL to the RESTful web service
         RestAssured.baseURI = "http://dev.embodee.com/services/factoryxml/";
@@ -105,7 +76,7 @@ public class bla {
         // as String.
         System.out.println("Response Body is =>  " + response2.asString());
 
-    }
+    }*/
 
 }
 
