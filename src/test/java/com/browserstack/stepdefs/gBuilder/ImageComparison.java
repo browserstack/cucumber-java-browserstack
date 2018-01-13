@@ -22,7 +22,7 @@ import static org.junit.Assert.assertTrue;
 
 public class ImageComparison {
     private WebDriver driver;
-    private SearchPage searchPage;
+    private SearchPage searchPage; // Променлива, идваща от SearchPage class-a, всеки път за нов патърн се прави нова променлива!
     private Local l;
 
     @Before
