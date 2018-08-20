@@ -30,7 +30,7 @@ public class checkUniformUDxml {
     @Given("^I ams on the website '(.+)'$")
     public void I_ams_on_the_website(String url) throws Throwable {
         // Specify the base URL to the RESTful web service
-        RestAssured.baseURI = "http://dev.embodee.com/services/factoryxml/";
+        RestAssured.baseURI = "http://api.plos.org/search?q=title:DNA";
 
         // Get the RequestSpecification of the request that you want to sent
         // to the server. The server is specified by the BaseURI that we have
@@ -41,7 +41,7 @@ public class checkUniformUDxml {
         // Make sure you specify the resource name.
         Response response1 = httpRequest.get(url);
 
-        Response response2 = httpRequest.get(url);  // "/UD5a268ac5b5ee9"
+        Response response2 = httpRequest.get(url);
 
         // Response.asString method will directly return the content of the body
         // as String.
@@ -53,8 +53,8 @@ public class checkUniformUDxml {
     @When("^Check query content for the right properties '(.+)'$")
     public void Check_query_content_for_the_right_properties(String url2) throws Throwable {
         given().when().get(url2).then()
-                .body(containsString("graphic"))
-                .body(containsString("id"));
+                .body(containsString("publication_date"))
+                .body(containsString("2007-03-14T00:00:00Z"));
 
 }
 
