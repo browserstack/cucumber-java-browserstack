@@ -24,6 +24,12 @@
             <artifactId>cucumber-java</artifactId>
             <version>1.2.5</version>
         </dependency>
+        <dependency>
+            <groupId>io.rest-assured</groupId>
+            <artifactId>rest-assured</artifactId>
+            <version>3.0.6</version>
+            <scope>test</scope>
+        </dependency>
 
         <dependency>
             <groupId>info.cukes</groupId>
@@ -44,6 +50,21 @@
             <version>4.12</version>
             <scope>test</scope>
         </dependency>
+        <!--<dependency>
+            <groupId>org.im4java</groupId>
+            <artifactId>im4java</artifactId>
+            <version>1.4.0</version>
+        </dependency>-->
+        <!--<dependency>
+            <groupId>net.avh4.util</groupId>
+            <artifactId>imagecomparison</artifactId>
+            <version>0.3.2</version>
+        </dependency>
+        <dependency>
+            <groupId>net.coobird</groupId>
+            <artifactId>thumbnailator</artifactId>
+            <version>0.4.5</version>
+        </dependency>-->
 
         <dependency>
             <groupId>org.apache.commons</groupId>
