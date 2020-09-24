@@ -11,14 +11,13 @@ public class SearchPage {
     }
 
     private By searchTermField = By.name("q");
-    private By submitSearch = By.id("_fZl");
 
     public void enterSearchTerm(String searchTerm) {
         webDriver.findElement(searchTermField).sendKeys(searchTerm);
     }
 
     public void submitSearch() {
-        webDriver.findElement(submitSearch).click();
+        webDriver.findElement(searchTermField).submit();
     }
 
 }

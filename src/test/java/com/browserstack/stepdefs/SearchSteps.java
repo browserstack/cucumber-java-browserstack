@@ -54,6 +54,7 @@ public class SearchSteps {
     public void I_submit_the_search_term(String searchTerm) throws Throwable {
         searchPage.enterSearchTerm(searchTerm);
         searchPage.submitSearch();
+        Thread.sleep(2000);
     }
 
     @Then("the page title should be '(.+)'$")
