@@ -23,7 +23,14 @@ public class SearchSteps {
     private WebDriver driver;
     private SearchPage searchPage;
     private Local l;
+    
+//Assaf
+    @RunWith(Cucumber.class)
+    @CucumberOptions()
 
+    public class RunnerTest {
+    }
+//Assaf
     @Before
     public void setUp(Scenario scenario) throws Exception {
         String USERNAME = System.getenv("BROWSERSTACK_USERNAME");
