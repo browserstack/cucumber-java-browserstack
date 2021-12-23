@@ -19,6 +19,11 @@ import java.util.Map;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
 
+@RunWith(Cucumber.class)
+@CucumberOptions()
+public class RunCucumberTest {
+}
+
 public class SearchSteps {
     private WebDriver driver;
     private SearchPage searchPage;
