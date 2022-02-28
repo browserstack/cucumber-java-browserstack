@@ -4,7 +4,7 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 
 public class SearchPage {
-    private static WebDriver webDriver;
+    private WebDriver webDriver;
 
     public SearchPage(WebDriver webDriver) {
         this.webDriver = webDriver;

@@ -1,13 +1,16 @@
 package com.browserstack.stepdefs;
 
+import com.browserstack.TestRunner;
 import com.browserstack.local.Local;
 import com.browserstack.pageobjects.SearchPage;
-import cucumber.api.Scenario;
-import cucumber.api.java.After;
-import cucumber.api.java.Before;
-import cucumber.api.java.en.Given;
-import cucumber.api.java.en.Then;
-import cucumber.api.java.en.When;
+import com.browserstack.util.Utility;
+import io.cucumber.java.After;
+import io.cucumber.java.Before;
+import io.cucumber.java.Scenario;
+import io.cucumber.java.en.Given;
+import io.cucumber.java.en.Then;
+import io.cucumber.java.en.When;
+import org.json.simple.JSONObject;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.remote.DesiredCapabilities;
 import org.openqa.selenium.remote.RemoteWebDriver;
@@ -26,18 +29,15 @@ public class SearchSteps {
 
     @Before
     public void setUp(Scenario scenario) throws Exception {
-        String USERNAME = System.getenv("BROWSERSTACK_USERNAME");
-        String ACCESS_KEY = System.getenv("BROWSERSTACK_ACCESS_KEY");
-        String URL = "https://" + USERNAME + ":" + ACCESS_KEY + "@hub.browserstack.com/wd/hub";
+        JSONObject capability = TestRunner.threadLocalValue.get();
+        String URL = String.format("https://%s/wd/hub",System.getProperty("server"));
 
-        DesiredCapabilities caps = new DesiredCapabilities();
-        caps.setCapability("browser", System.getProperty("browser"));
-
-        if (System.getProperty("local") != null && System.getProperty("local").equals("true")) {
-            caps.setCapability("browserstack.local", "true");
+        DesiredCapabilities caps = new DesiredCapabilities(capability);
+        caps.setCapability("name", scenario.getName());
+        if (caps.getCapability("browserstack.local")!=null && caps.getCapability("browserstack.local").toString().equals("true")) {
             l = new Local();
             Map<String, String> options = new HashMap<String, String>();
-            options.put("key", ACCESS_KEY);
+            options.put("key", caps.getCapability("browserstack.key").toString());
             l.start(options);
         }
 
@@ -48,6 +48,7 @@ public class SearchSteps {
     @Given("^I am on the website '(.+)'$")
     public void I_am_on_the_website(String url) throws Throwable {
         driver.get(url);
+        Thread.sleep(2000);
     }
 
     @When("^I submit the search term '(.+)'$")
@@ -68,7 +69,13 @@ public class SearchSteps {
     }
 
     @After
-    public void teardown() throws Exception {
+    public void teardown(Scenario scenario) throws Exception {
+        if (scenario.isFailed()) {
+            Utility.setSessionStatus(driver, "failed", String.format("%s failed.", scenario.getName()));
+        } else {
+            Utility.setSessionStatus(driver, "passed", String.format("%s passed.", scenario.getName()));
+        }
+        Thread.sleep(2000);
         driver.quit();
         if (l != null) l.stop();
     }
