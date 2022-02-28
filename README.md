@@ -1,18 +1,19 @@
-# Cucumber JVM-Browserstack
-[Cucumber JVM](https://cucumber.io/docs/reference/jvm) Integration with BrowserStack.
+# Cucumber Java Browserstack 
+<img src="https://avatars.githubusercontent.com/u/1119453?s=200&v=4" width="60" height="60" ><img src="https://avatars.githubusercontent.com/u/320565?s=200&v=4" width="60" height="60" >
 
-![BrowserStack Logo](https://d98b8t1nnulk5.cloudfront.net/production/images/layout/logo-header.png?1469004780) 
-<img src="https://cucumber.io/images/cucumber-logo.svg" height="110" />
+[Cucumber JVM](https://cucumber.io/docs/reference/jvm) Integration with BrowserStack.
 
 ## Setup
 * Clone the repo
 * Install dependencies `mvn install`
-* Set environment variables with your [BrowserStack Username and Access Key](https://www.browserstack.com/accounts/settings). 
+* Set environment variables with your [BrowserStack Username and Access Key](https://www.browserstack.com/accounts/settings).
+* Update `*.conf.js` files inside the `src/test/resources/conf/` directory to update desired capabilities.
 
 ## Running your tests
-* To run a single test, run `mvn install -Dbrowser=<BROWSER>`
-  * Note - use command line properties to set additional webdriver capabilities
-* To run parallel tests, run `make run_all_in_parallel`
+* To run a single test, run `mvn compile exec:java -P single`
+* To run parallel tests, run `mvn compile exec:java -P parallel` 
+* To run local tests, run `mvn compile exec:java -P local`
+
 
 
 ## Notes
