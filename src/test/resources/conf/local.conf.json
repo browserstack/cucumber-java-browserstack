@@ -5,7 +5,6 @@
 
   "capabilities": {
     "build": "cucumber-java-browserstack",
-    "name": "local_test",
     "browserstack.debug": true,
     "browserstack.local": true
   },

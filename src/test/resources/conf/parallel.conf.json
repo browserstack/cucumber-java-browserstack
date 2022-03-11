@@ -5,7 +5,6 @@
 
   "capabilities": {
     "build": "cucumber-java-browserstack",
-    "name": "parallel_test",
     "browserstack.debug": true
   },
 
@@ -17,8 +16,7 @@
       "browser": "firefox"
     },
     {
-      "browser": "safari",
-      "os": "OS X"
+      "browser": "safari"
     },
     {
       "browser": "Internet Explorer"
