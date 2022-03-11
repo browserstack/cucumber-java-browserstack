@@ -5,7 +5,6 @@
 
   "capabilities": {
     "build": "cucumber-java-browserstack",
-    "name": "single_test",
     "browserstack.debug": true
   },
 
