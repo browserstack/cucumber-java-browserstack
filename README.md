@@ -1,5 +1,5 @@
 # Cucumber Java Browserstack 
-<img src="https://avatars.githubusercontent.com/u/1119453?s=200&v=4" width="60" height="60" ><img src="https://avatars.githubusercontent.com/u/320565?s=200&v=4" width="60" height="60" >
+<img src="src/test/resources/img/browserstack.png" width="60" height="60" ><img src="src/test/resources/img/cucumber.png" width="60" height="60" >
 
 [Cucumber JVM](https://cucumber.io/docs/reference/jvm) Integration with BrowserStack.
 
