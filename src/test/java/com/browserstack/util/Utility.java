@@ -15,13 +15,13 @@ public class Utility {
         Iterator it = envCapabilities.entrySet().iterator();
         while (it.hasNext()) {
             Map.Entry pair = (Map.Entry) it.next();
-            capabilities.put(pair.getKey().toString(), pair.getValue().toString());
+            capabilities.put(pair.getKey().toString(), pair.getValue());
         }
         it = commonCapabilities.entrySet().iterator();
         while (it.hasNext()) {
             Map.Entry pair = (Map.Entry) it.next();
             if (capabilities.get(pair.getKey().toString()) == null) {
-                capabilities.put(pair.getKey().toString(), pair.getValue().toString());
+                capabilities.put(pair.getKey().toString(), pair.getValue());
             }
         }
         String username = System.getenv("BROWSERSTACK_USERNAME");
@@ -33,8 +33,12 @@ public class Utility {
         if(accessKey == null) {
             accessKey = (String) config.get("key");
         }
-        capabilities.put("browserstack.user", username);
-        capabilities.put("browserstack.key", accessKey);
+        JSONObject bstackOptions = (JSONObject) capabilities.get("bstack:options");
+        if(bstackOptions == null)
+            bstackOptions = new JSONObject();
+        bstackOptions.put("userName", username);
+        bstackOptions.put("accessKey", accessKey);
+        capabilities.put("bstack:options", bstackOptions);
         return capabilities;
     }
 

@@ -14,6 +14,8 @@ import org.json.simple.JSONObject;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.remote.DesiredCapabilities;
 import org.openqa.selenium.remote.RemoteWebDriver;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import java.net.URL;
 import java.util.HashMap;
@@ -26,6 +28,7 @@ public class SearchSteps {
     private WebDriver driver;
     private SearchPage searchPage;
     private Local l;
+    private final Logger LOG = LoggerFactory.getLogger(SearchSteps.class);
 
     @Before
     public void setUp(Scenario scenario) throws Exception {
@@ -34,10 +37,12 @@ public class SearchSteps {
 
         DesiredCapabilities caps = new DesiredCapabilities(capability);
         caps.setCapability("name", scenario.getName());
-        if (caps.getCapability("browserstack.local")!=null && caps.getCapability("browserstack.local").toString().equals("true")) {
+        Map<String, Object> bstackOptions = (Map<String, Object>) caps.getCapability("bstack:options");
+        if (bstackOptions!=null && bstackOptions.get("local")!=null && bstackOptions.get("local").toString().equals("true")) {
+            LOG.info("Start BrowserStack Local");
             l = new Local();
             Map<String, String> options = new HashMap<String, String>();
-            options.put("key", caps.getCapability("browserstack.key").toString());
+            options.put("key", bstackOptions.get("accessKey").toString());
             l.start(options);
         }
 
@@ -77,6 +82,9 @@ public class SearchSteps {
         }
         Thread.sleep(2000);
         driver.quit();
-        if (l != null) l.stop();
+        if (l != null) {
+            l.stop();
+            LOG.info("Stop BrowserStack Local");
+        }
     }
 }
