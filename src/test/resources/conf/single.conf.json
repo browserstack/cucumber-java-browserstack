@@ -4,9 +4,9 @@
   "key": "BROWSERSTACK_ACCESS_KEY",
 
   "capabilities": {
-    "bstack:options" : {
-      "buildName" : "cucumber-java-browserstack",
-      "debug" : "true"
+    "bstack:options": {
+      "buildName": "cucumber-java-browserstack",
+      "debug": "true"
     }
   },
 
