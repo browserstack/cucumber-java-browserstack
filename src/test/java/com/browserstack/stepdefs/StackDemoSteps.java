@@ -2,7 +2,7 @@ package com.browserstack.stepdefs;
 
 import com.browserstack.TestRunner;
 import com.browserstack.local.Local;
-import com.browserstack.pageobjects.SearchPage;
+import com.browserstack.pageobjects.HomePage;
 import com.browserstack.util.Utility;
 import io.cucumber.java.After;
 import io.cucumber.java.Before;
@@ -22,9 +22,9 @@ import java.util.Map;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
 
-public class SearchSteps {
+public class StackDemoSteps {
     private WebDriver driver;
-    private SearchPage searchPage;
+    private HomePage homePage;
     private Local l;
 
     @Before
@@ -36,13 +36,13 @@ public class SearchSteps {
         caps.setCapability("name", scenario.getName());
         if (caps.getCapability("browserstack.local")!=null && caps.getCapability("browserstack.local").toString().equals("true")) {
             l = new Local();
-            Map<String, String> options = new HashMap<String, String>();
+            Map<String, String> options = new HashMap<>();
             options.put("key", caps.getCapability("browserstack.key").toString());
             l.start(options);
         }
 
         driver = new RemoteWebDriver(new URL(URL), caps);
-        searchPage = new SearchPage(driver);
+        homePage = new HomePage(driver);
     }
 
     @Given("^I am on the website '(.+)'$")
@@ -51,20 +51,21 @@ public class SearchSteps {
         Thread.sleep(2000);
     }
 
-    @When("^I submit the search term '(.+)'$")
-    public void I_submit_the_search_term(String searchTerm) throws Throwable {
-        searchPage.enterSearchTerm(searchTerm);
-        searchPage.submitSearch();
+    @When("^I select a product and click on 'Add to cart' button")
+    public void I_select_a_product_and_add_to_cart() throws Throwable {
+        homePage.selectFirstProductName();
+        homePage.clickAddToCartButton();
         Thread.sleep(2000);
     }
 
-    @Then("the page title should be '(.+)'$")
-    public void I_should_see_pagetitle(String expectedTitle) throws Throwable {
-        assertEquals(expectedTitle, driver.getTitle());
+    @Then("the product should be added to cart")
+    public void product_should_be_added_to_cart() {
+        homePage.waitForCartToOpen();
+        assertEquals(homePage.getSelectedProductName(), homePage.getProductCartText());
     }
 
     @Then("the page should contain '(.+)'$")
-    public void page_should_contain(String expectedTitle) throws Throwable {
+    public void page_should_contain(String expectedTitle) {
         assertTrue(driver.getPageSource().contains(expectedTitle));
     }
 
