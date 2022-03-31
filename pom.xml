@@ -144,7 +144,7 @@
                                 </property>
                                 <property>
                                     <key>parallel-count</key>
-                                    <value>5</value>
+                                    <value>3</value>
                                 </property>
                                 <property>
                                     <key>features</key>
