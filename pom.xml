@@ -15,6 +15,7 @@
         <maven.compiler.source>1.8</maven.compiler.source>
         <maven.compiler.target>1.8</maven.compiler.target>
         <cucumber.version>6.9.1</cucumber.version>
+        <testng.version>7.4.0</testng.version>
         <selenium-java.version>4.1.2</selenium-java.version>
         <browserstack-local-java.version>1.0.6</browserstack-local-java.version>
         <json-simple.version>1.1.1</json-simple.version>
@@ -35,8 +36,20 @@
         </dependency>
 
         <dependency>
+            <groupId>org.testng</groupId>
+            <artifactId>testng</artifactId>
+            <version>${testng.version}</version>
+            <scope>test</scope>
+        </dependency>
+        <dependency>
             <groupId>io.cucumber</groupId>
             <artifactId>cucumber-java</artifactId>
+            <version>${cucumber.version}</version>
+            <scope>test</scope>
+        </dependency>
+        <dependency>
+            <groupId>io.cucumber</groupId>
+            <artifactId>cucumber-testng</artifactId>
             <version>${cucumber.version}</version>
             <scope>test</scope>
         </dependency>
@@ -87,31 +100,21 @@
             <build>
                 <plugins>
                     <plugin>
-                        <groupId>org.codehaus.mojo</groupId>
-                        <artifactId>exec-maven-plugin</artifactId>
-                        <version>3.0.0</version>
+                        <groupId>org.apache.maven.plugins</groupId>
+                        <artifactId>maven-surefire-plugin</artifactId>
+                        <version>3.0.0-M5</version>
                         <configuration>
-                            <classpathScope>test</classpathScope>
-                            <mainClass>com.browserstack.TestRunner</mainClass>
-                            <cleanupDaemonThreads>false</cleanupDaemonThreads>
-                            <systemProperties>
-                                <property>
-                                    <key>cucumber.publish.quiet</key>
-                                    <value>true</value>
-                                </property>
-                                <property>
-                                    <key>cucumber.plugin</key>
-                                    <value>html:target/cucumber-html-reports.html</value>
-                                </property>
-                                <property>
-                                    <key>caps</key>
-                                    <value>src/test/resources/conf/single.conf.json</value>
-                                </property>
-                                <property>
-                                    <key>features</key>
-                                    <value>src/test/resources/features/test</value>
-                                </property>
-                            </systemProperties>
+                            <suiteXmlFiles>
+                                <suiteXmlFile>src/test/resources/testng.xml</suiteXmlFile>
+                            </suiteXmlFiles>
+                            <argLine>
+                                -Ddataproviderthreadcount=1
+                            </argLine>
+                            <systemPropertyVariables>
+                                <caps>src/test/resources/conf/single.conf.json</caps>
+                                <cucumber.publish.quiet>true</cucumber.publish.quiet>
+                                <cucumber.features>src/test/resources/features/test</cucumber.features>
+                            </systemPropertyVariables>
                         </configuration>
                     </plugin>
                 </plugins>
@@ -122,35 +125,27 @@
             <build>
                 <plugins>
                     <plugin>
-                        <groupId>org.codehaus.mojo</groupId>
-                        <artifactId>exec-maven-plugin</artifactId>
-                        <version>3.0.0</version>
+                        <groupId>org.apache.maven.plugins</groupId>
+                        <artifactId>maven-surefire-plugin</artifactId>
+                        <version>3.0.0-M5</version>
                         <configuration>
-                            <classpathScope>test</classpathScope>
-                            <mainClass>com.browserstack.TestRunner</mainClass>
-                            <cleanupDaemonThreads>false</cleanupDaemonThreads>
-                            <systemProperties>
+                            <suiteXmlFiles>
+                                <suiteXmlFile>src/test/resources/testng.xml</suiteXmlFile>
+                            </suiteXmlFiles>
+                            <argLine>
+                                -Ddataproviderthreadcount=4
+                            </argLine>
+                            <systemPropertyVariables>
+                                <caps>src/test/resources/conf/parallel.conf.json</caps>
+                                <cucumber.publish.quiet>true</cucumber.publish.quiet>
+                                <cucumber.features>src/test/resources/features/test</cucumber.features>
+                            </systemPropertyVariables>
+                            <properties>
                                 <property>
-                                    <key>cucumber.publish.quiet</key>
-                                    <value>true</value>
+                                    <name>parallel</name>
+                                    <value>methods</value>
                                 </property>
-                                <property>
-                                    <key>cucumber.plugin</key>
-                                    <value>html:target/cucumber-html-reports.html</value>
-                                </property>
-                                <property>
-                                    <key>caps</key>
-                                    <value>src/test/resources/conf/parallel.conf.json</value>
-                                </property>
-                                <property>
-                                    <key>parallel-count</key>
-                                    <value>3</value>
-                                </property>
-                                <property>
-                                    <key>features</key>
-                                    <value>src/test/resources/features/test</value>
-                                </property>
-                            </systemProperties>
+                            </properties>
                         </configuration>
                     </plugin>
                 </plugins>
@@ -161,31 +156,21 @@
             <build>
                 <plugins>
                     <plugin>
-                        <groupId>org.codehaus.mojo</groupId>
-                        <artifactId>exec-maven-plugin</artifactId>
-                        <version>3.0.0</version>
+                        <groupId>org.apache.maven.plugins</groupId>
+                        <artifactId>maven-surefire-plugin</artifactId>
+                        <version>3.0.0-M5</version>
                         <configuration>
-                            <classpathScope>test</classpathScope>
-                            <mainClass>com.browserstack.TestRunner</mainClass>
-                            <cleanupDaemonThreads>false</cleanupDaemonThreads>
-                            <systemProperties>
-                                <property>
-                                    <key>cucumber.publish.quiet</key>
-                                    <value>true</value>
-                                </property>
-                                <property>
-                                    <key>cucumber.plugin</key>
-                                    <value>html:target/cucumber-html-reports.html</value>
-                                </property>
-                                <property>
-                                    <key>caps</key>
-                                    <value>src/test/resources/conf/local.conf.json</value>
-                                </property>
-                                <property>
-                                    <key>features</key>
-                                    <value>src/test/resources/features/localtest</value>
-                                </property>
-                            </systemProperties>
+                            <suiteXmlFiles>
+                                <suiteXmlFile>src/test/resources/testng.xml</suiteXmlFile>
+                            </suiteXmlFiles>
+                            <argLine>
+                                -Ddataproviderthreadcount=1
+                            </argLine>
+                            <systemPropertyVariables>
+                                <caps>src/test/resources/conf/local.conf.json</caps>
+                                <cucumber.publish.quiet>true</cucumber.publish.quiet>
+                                <cucumber.features>src/test/resources/features/localtest</cucumber.features>
+                            </systemPropertyVariables>
                         </configuration>
                     </plugin>
                 </plugins>
