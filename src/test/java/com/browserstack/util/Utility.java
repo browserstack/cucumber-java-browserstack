@@ -1,9 +1,12 @@
 package com.browserstack.util;
 
+import com.browserstack.local.Local;
+import com.browserstack.webdriver.ManagedWebDriver;
 import org.json.simple.JSONObject;
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
 
+import java.util.HashMap;
 import java.util.Iterator;
 import java.util.Map;
 
@@ -45,5 +48,23 @@ public class Utility {
     public static void setSessionStatus(WebDriver webDriver, String status, String reason) {
         JavascriptExecutor jse = (JavascriptExecutor) webDriver;
         jse.executeScript(String.format("browserstack_executor: {\"action\": \"setSessionStatus\", \"arguments\": {\"status\": \"%s\", \"reason\": \"%s\"}}", status, reason));
+    }
+
+    public static boolean isLocal(ManagedWebDriver managedWebDriver) {
+        JSONObject platform = managedWebDriver.getPlatform();
+        Map<String, Object> bstackOptions = (Map<String, Object>) platform.get("bstack:options");
+        return bstackOptions!=null && bstackOptions.get("local")!=null && bstackOptions.get("local").toString().equals("true");
+    }
+
+    public static void startLocal(Local local, ManagedWebDriver managedWebDriver) {
+        Map<String, String> options = new HashMap<>();
+        JSONObject platform = managedWebDriver.getPlatform();
+        Map<String, Object> bstackOptions = (Map<String, Object>) platform.get("bstack:options");
+        options.put("key", bstackOptions.get("accessKey").toString());
+        try {
+            local.start(options);
+        } catch (Exception e) {
+            throw new Error("Unable to start BrowserStack Local.");
+        }
     }
 }
