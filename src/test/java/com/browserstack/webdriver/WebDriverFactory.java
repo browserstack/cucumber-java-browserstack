@@ -27,7 +27,6 @@ public class WebDriverFactory {
 
     public static WebDriverFactory getInstance() {
         if (instance == null) {
-            Class var0 = WebDriverFactory.class;
             synchronized(WebDriverFactory.class) {
                 if (instance == null) {
                     instance = new WebDriverFactory();
