@@ -13,5 +13,9 @@
 
   "environments": [{
     "browserName": "chrome"
-  }]
+  }],
+
+  "localOptions": {
+    "forceLocal": true
+  }
 }
