@@ -60,7 +60,8 @@ public class RunWebDriverCucumberTests {
     @DataProvider(name = "scenarios", parallel = true)
     public Iterator<Object[]> scenarios() {
         Object[][] scenarios = testNGCucumberRunner.provideScenarios();
-        return new LazyInitWebDriverIterator(true, scenarios);
+        //Get Iterator of Object arrays consisting PickleWrapper, FeatureWrapper and ManagedWebDriver
+        return new LazyInitWebDriverIterator(scenarios);
     }
 
     @AfterClass(alwaysRun = true)
