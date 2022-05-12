@@ -1,19 +1,20 @@
 package com.browserstack;
 
+import java.util.Iterator;
+
 import com.browserstack.local.Local;
 import com.browserstack.util.Utility;
+import org.testng.annotations.AfterClass;
+import org.testng.annotations.BeforeClass;
+import org.testng.annotations.DataProvider;
+import org.testng.annotations.Test;
+
 import com.browserstack.webdriver.LazyInitWebDriverIterator;
 import com.browserstack.webdriver.ManagedWebDriver;
 import io.cucumber.testng.CucumberOptions;
 import io.cucumber.testng.FeatureWrapper;
 import io.cucumber.testng.PickleWrapper;
 import io.cucumber.testng.TestNGCucumberRunner;
-import org.testng.annotations.AfterClass;
-import org.testng.annotations.BeforeClass;
-import org.testng.annotations.DataProvider;
-import org.testng.annotations.Test;
-
-import java.util.Iterator;
 
 @CucumberOptions(
         glue = "com.browserstack.stepdefs",
@@ -59,7 +60,8 @@ public class RunWebDriverCucumberTests {
     @DataProvider(name = "scenarios", parallel = true)
     public Iterator<Object[]> scenarios() {
         Object[][] scenarios = testNGCucumberRunner.provideScenarios();
-        return new LazyInitWebDriverIterator(true, scenarios);
+        //Get Iterator of Object arrays consisting PickleWrapper, FeatureWrapper and ManagedWebDriver
+        return new LazyInitWebDriverIterator(scenarios);
     }
 
     @AfterClass(alwaysRun = true)
