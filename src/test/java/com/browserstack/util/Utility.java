@@ -3,9 +3,11 @@ package com.browserstack.util;
 import com.browserstack.local.Local;
 import com.browserstack.webdriver.ManagedWebDriver;
 import org.json.simple.JSONObject;
+import org.json.simple.parser.JSONParser;
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
 
+import java.io.FileReader;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.Map;
@@ -52,9 +54,16 @@ public class Utility {
     }
 
     public static void startLocal(Local local, ManagedWebDriver managedWebDriver) {
+        JSONParser parser = new JSONParser();
         Map<String, String> options = new HashMap<>();
         options.put("key", managedWebDriver.getPlatform().get("browserstack.key").toString());
+        String capabilitiesConfigFile = System.getProperty("caps", "src/test/resources/conf/local.conf.json");
         try {
+            JSONObject testConfig = (JSONObject) parser.parse(new FileReader(capabilitiesConfigFile));
+            if(testConfig.containsKey("localOptions")) {
+                JSONObject localOptions = (JSONObject) testConfig.get("localOptions");
+                options.forEach(localOptions::putIfAbsent);
+            }
             local.start(options);
         } catch (Exception e) {
             throw new Error("Unable to start BrowserStack Local.");
