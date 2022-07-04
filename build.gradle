@@ -4,15 +4,10 @@ plugins {
 
 repositories {
     mavenCentral()
-    mavenLocal()
-    google()
 }
 
 dependencies {
-    implementation 'commons-io:commons-io:1.3.2'
     implementation 'org.seleniumhq.selenium:selenium-java:3.141.59'
-    implementation 'com.googlecode.json-simple:json-simple:1.1.1'
-    implementation 'io.cucumber:cucumber-jvm:7.4.1'
     testImplementation 'io.cucumber:cucumber-java:7.3.4'
     testImplementation 'io.cucumber:cucumber-testng:7.3.4'
     testImplementation 'io.cucumber:cucumber-core:7.3.4'
@@ -36,7 +31,7 @@ task sampleTest(type: Test) {
     systemProperty "cucumber.features", "src/test/resources/features/test"
     systemProperties System.getProperties()
     useTestNG() {
-        dependsOn cleanTest
+        dependsOn clean
         useDefaultListeners = true
         suites "src/test/resources/testng.xml"
         jvmArgs "-javaagent:${browserstackSDKArtifact.file}"
@@ -49,7 +44,7 @@ task sampleLocalTest(type: Test) {
     systemProperty "cucumber.features", "src/test/resources/features/localtest"
     systemProperties System.getProperties()
     useTestNG() {
-        dependsOn cleanTest
+        dependsOn clean
         useDefaultListeners = true
         suites "src/test/resources/testng.xml"
         jvmArgs "-javaagent:${browserstackSDKArtifact.file}"
