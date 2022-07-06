@@ -1,22 +1,24 @@
-{
-  "server": "hub.browserstack.com",
-  "user": "BROWSERSTACK_USERNAME",
-  "key": "BROWSERSTACK_ACCESS_KEY",
+     {
+        "server": "hub.browserstack.com",
+        "user": "msiva_HK09sz",
+        "key": "nQpMVBMmbKUgKV9Pw6UL",
 
-  "capabilities": {
-    "build": "cucumber-java-browserstack",
-    "browserstack.debug": true
-  },
+        "capabilities": {
+            "bstack:options": {
+            "buildName": "cucumber-java-browserstack",
+            "debug": "true"
+            }
+        },
 
-  "environments": [
-    {
-      "browser": "chrome"
-    },
-    {
-      "browser": "firefox"
-    },
-    {
-      "browser": "safari"
-    }
-  ]
-}
+        "environments": [
+            {
+            "browserName": "chrome"
+            },
+            {
+            "browserName": "firefox"
+            },
+            {
+            "browserName": "safari"
+            }
+        ]
+        }
