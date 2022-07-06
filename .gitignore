@@ -19,3 +19,6 @@ logs/
 
 local.log
 reports
+.gradle
+gradle
+build
