@@ -8,8 +8,7 @@ import io.cucumber.testng.*;
                 "pretty",
                 "html:reports/tests/cucumber/cucumber-pretty.html",
                 "testng:reports/tests/cucumber/testng/cucumber.xml",
-                "json:reports/tests/cucumber/json/cucumberTestReport.json",
-                "message:reports/tests/cucumber/message.txt"
+                "json:reports/tests/cucumber/json/cucumberTestReport.json"
         }
 )
 public class RunWebDriverCucumberTests extends AbstractTestNGCucumberTests {}
