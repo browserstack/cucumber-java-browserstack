@@ -31,11 +31,11 @@ framework: cucumber-testng
 platforms:
   - os: OS X
     osVersion: Big Sur
-    browser: Chrome
+    browserName: Chrome
     browserVersion: latest
   - os: Windows
     osVersion: 10
-    browser: Edge
+    browserName: Edge
     browserVersion: latest
   - device: Samsung Galaxy S22 Ultra
     browserName: chrome # Try 'samsung' for Samsung browser
