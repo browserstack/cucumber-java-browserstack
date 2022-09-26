@@ -5,6 +5,8 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
+import java.time.Duration;
+
 public class HomePage {
     private WebDriver webDriver;
 
@@ -33,7 +35,7 @@ public class HomePage {
     }
 
     public void waitForCartToOpen() {
-        new WebDriverWait(webDriver,30).until(ExpectedConditions.visibilityOfAllElementsLocatedBy(cartPane));
+        new WebDriverWait(webDriver, Duration.ofSeconds(30)).until(ExpectedConditions.visibilityOfAllElementsLocatedBy(cartPane));
     }
 
     public String getProductCartText() {
