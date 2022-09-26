@@ -22,6 +22,7 @@ projectName: BrowserStack Samples
 
 # Use `framework` to set the framework of your project. Example, testng, cucumber, cucumber-testng
 framework: cucumber-testng
+source: cucumber:sample-sdk-v1.0
 
 # =======================================
 # Platforms (Browsers / Devices to test)
