@@ -67,7 +67,6 @@ public class Utility {
         JSONParser parser = new JSONParser();
         Map<String, String> options = new HashMap<>();
         JSONObject testConfig = (JSONObject) managedWebDriver.getPlatform().get("bstack:options");
-        System.out.println("Hello" + testConfig);
         options.put("key", testConfig.get("accessKey").toString());
         String capabilitiesConfigFile = System.getProperty("caps", "src/test/resources/conf/local.conf.json");
         try {
