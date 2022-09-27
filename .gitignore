@@ -18,3 +18,11 @@ target/
 
 local.log
 reports
+.classpath
+.gradle
+.project
+.settings
+build
+gradle
+logs
+test-output

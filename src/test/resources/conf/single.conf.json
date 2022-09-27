@@ -5,7 +5,8 @@
 
   "capabilities": {
     "build": "cucumber-java-browserstack",
-    "browserstack.debug": true
+    "browserstack.debug": true,
+    "browserstack.source": "cucumber:sample-selenium-3-v1.0"
   },
 
   "environments": [{
