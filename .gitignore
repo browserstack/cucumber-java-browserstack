@@ -22,3 +22,7 @@ reports
 .gradle
 gradle
 build
+.classpath
+.project
+.settings
+test-output

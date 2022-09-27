@@ -83,14 +83,27 @@
                     </execution>
                 </executions>
             </plugin>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                    <artifactId>maven-surefire-plugin</artifactId>
+                    <version>3.0.0-M5</version>
+                    <configuration>
+                        <suiteXmlFiles>
+                            <suiteXmlFile>src/test/resources/testng.xml</suiteXmlFile>
+                        </suiteXmlFiles>
+                        <argLine>
+                            -javaagent:${com.browserstack:browserstack-java-sdk:jar}
+                        </argLine>
+                        <systemPropertyVariables>
+                            <cucumber.publish.quiet>true</cucumber.publish.quiet>
+                        </systemPropertyVariables>
+                    </configuration>
+            </plugin>
         </plugins>
     </build>
     <profiles>
         <profile>
             <id>sample-test</id>
-            <activation>
-                <activeByDefault>true</activeByDefault>
-            </activation>
             <build>
                 <plugins>
                     <plugin>
