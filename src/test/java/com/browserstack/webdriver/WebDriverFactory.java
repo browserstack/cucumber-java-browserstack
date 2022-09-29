@@ -5,6 +5,7 @@ import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
 import org.json.simple.parser.ParseException;
+import org.openqa.selenium.MutableCapabilities;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.remote.DesiredCapabilities;
 import org.openqa.selenium.remote.RemoteWebDriver;
@@ -61,8 +62,7 @@ public class WebDriverFactory {
     public WebDriver createWebDriverForPlatform(JSONObject platform, String testName) {
         try {
             String URL = String.format("https://%s/wd/hub", testConfig.get("server"));
-            DesiredCapabilities caps = new DesiredCapabilities(platform);
-            caps.setCapability("name", testName);
+            MutableCapabilities caps = new MutableCapabilities(platform);
             return new RemoteWebDriver(new URL(URL), caps);
         } catch (MalformedURLException var4) {
             throw new Error("Unable to create WebDriver", var4);

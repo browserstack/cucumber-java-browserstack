@@ -4,16 +4,25 @@
   "key": "BROWSERSTACK_ACCESS_KEY",
 
   "capabilities": {
-    "build": "cucumber-java-browserstack",
-    "browserstack.debug": true,
-    "browserstack.local": true
+    "bstack:options": {
+      "buildName": "browserstack-build-1",
+      "sessionName": "BStack Local Test",
+      "debug": true,
+      "local": true,
+      "source": "cucumber:sample-master-v1.0"
+    }
   },
-
-  "environments": [{
-    "browser": "chrome"
-  }],
 
   "localOptions": {
     "forceLocal": true
-  }
+  },
+
+  "environments": [
+    {
+      "bstack:options": {
+        "os": "OS X"
+      },
+      "browserName": "chrome"
+    }
+  ]
 }

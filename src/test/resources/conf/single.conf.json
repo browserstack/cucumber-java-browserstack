@@ -4,11 +4,18 @@
   "key": "BROWSERSTACK_ACCESS_KEY",
 
   "capabilities": {
-    "build": "cucumber-java-browserstack",
-    "browserstack.debug": true
+    "bstack:options": {
+      "buildName": "browserstack-build-1",
+      "sessionName": "BStack Single Test",
+      "browserVersion": "latest",
+      "debug": true,
+      "source": "cucumber:sample-master-v1.0"
+    }
   },
 
-  "environments": [{
-    "browser": "chrome"
-  }]
+  "environments": [
+    {
+      "browserName": "chrome"
+    }
+  ]
 }
