@@ -22,6 +22,8 @@ reports
 .gradle
 gradle
 build
+
+# Eclipse generated
 .classpath
 .project
 .settings
