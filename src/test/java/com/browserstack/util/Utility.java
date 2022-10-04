@@ -32,7 +32,7 @@ public class Utility {
         JSONObject bstackOptions = commonCapabilities.get("bstack:options") != null ? (JSONObject) commonCapabilities.get("bstack:options") : new JSONObject();
         bstackOptions.putIfAbsent("userName", username);
         bstackOptions.putIfAbsent("accessKey", accessKey);
-        bstackOptions.putIfAbsent("source", "cucumber:sample-master:v1.0");
+        bstackOptions.putIfAbsent("source", "cucumber-java:sample-master:v1.0");
         capabilities.put("bstack:options", bstackOptions);
 
         while (it.hasNext()) {
