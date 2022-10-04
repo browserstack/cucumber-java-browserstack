@@ -6,10 +6,9 @@
   "capabilities": {
     "bstack:options": {
       "buildName": "browserstack-build-1",
-      "sessionName": "BStack Local Test",
+      "sessionName": "BStack local cucumber-java",
       "debug": true,
-      "local": true,
-      "source": "cucumber:sample-master-v1.0"
+      "local": true
     }
   },
 
