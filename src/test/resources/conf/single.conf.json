@@ -4,7 +4,7 @@
   "key": "BROWSERSTACK_ACCESS_KEY",
 
   "capabilities": {
-    "build": "cucumber-java-browserstack",
+    "build": "browserstack-build-1",
     "browserstack.debug": true
   },
 

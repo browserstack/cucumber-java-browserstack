@@ -18,3 +18,15 @@ target/
 
 local.log
 reports
+.gradle
+gradle
+build
+
+# Eclipse generated
+.classpath
+.project
+.settings
+test-output
+
+# browserstack sdk generated
+logs
