@@ -51,9 +51,9 @@ public class StackDemoSteps {
         Assert.assertEquals(homePage.getSelectedProductName(), homePage.getProductCartText());
     }
 
-    @Then("the page should contain '(.+)'$")
-    public void page_should_contain(String expectedTitle) {
-        Assert.assertTrue(driver.getPageSource().contains(expectedTitle));
+    @Then("the page title should contain '(.+)'$")
+    public void page_title_should_contain(String expectedTitle) {
+        Assert.assertTrue(driver.getTitle().contains(expectedTitle));
     }
 
     @After
