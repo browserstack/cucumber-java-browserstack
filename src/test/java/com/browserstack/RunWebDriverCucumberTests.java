@@ -1,6 +1,8 @@
 package com.browserstack;
 
-import io.cucumber.testng.*;
+import io.cucumber.junit.Cucumber;
+import io.cucumber.junit.CucumberOptions;
+import org.junit.runner.RunWith;
 
 @CucumberOptions(
         glue = "com.browserstack.stepdefs",
@@ -8,8 +10,11 @@ import io.cucumber.testng.*;
         plugin = {
                 "pretty",
                 "html:reports/tests/cucumber/cucumber-pretty.html",
-                "testng:reports/tests/cucumber/testng/cucumber.xml",
+                "junit:reports/tests/cucumber/junit/cucumber.xml",
                 "json:reports/tests/cucumber/json/cucumberTestReport.json"
         }
 )
-public class RunWebDriverCucumberTests extends AbstractTestNGCucumberTests {}
+
+@RunWith(Cucumber.class)
+public class RunWebDriverCucumberTests {
+}

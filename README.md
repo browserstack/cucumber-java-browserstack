@@ -46,54 +46,20 @@ Understand how many parallel sessions you need by using our [Parallel Test Calcu
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-surefire-plugin</artifactId>
                 <version>3.0.0-M5</version>
+                <dependencies>
+                    <dependency>
+                        <groupId>org.apache.maven.surefire</groupId>
+                        <artifactId>surefire-junit47</artifactId>
+                        <version>3.0.0-M5</version>
+                    </dependency>
+                </dependencies>
                 <configuration>
-                    <suiteXmlFiles>
-                        <suiteXmlFile>src/test/resources/testng.xml</suiteXmlFile>
-                    </suiteXmlFiles>
                     <argLine>
                         -javaagent:${com.browserstack:browserstack-java-sdk:jar}
                     </argLine>
                 </configuration>
             </plugin>
 ```
-
-### Migrate from Vanilla Cucumber to use Testng Runner 
-* If you are using Vanilla Cucumber CLI, you can migrate to use TestNG Runner with BrowserStack using the below command :
-```
-mvn archetype:generate -DarchetypeGroupId=com.browserstack -DarchetypeArtifactId=cucumber-testng-archetype -DarchetypeVersion=1.0 -DgroupId=com.browserstack -DartifactId=cucumber-testng-archetype -Dversion=1.0 -DinteractiveMode=false
-```
-* Run your tests using `mvn test`
-* To use specific `@CucumberOptions` in generated class `BrowserStackCucumberTestNgRunner`, refer - https://javadoc.io/static/io.cucumber/cucumber-testng/5.0.0-RC2/io/cucumber/testng/CucumberOptions.html
-
-## Using Gradle
-
-### Run sample build
-
-- Clone the repository
-- Install dependencies `gradle build`
-- To run the test suite having cross-platform with parallelization, run `gradle sampleTest`
-- To run local tests, run `gradle sampleLocalTest`
-
-Understand how many parallel sessions you need by using our [Parallel Test Calculator](https://www.browserstack.com/automate/parallel-calculator?ref=github)
-
-### Integrate your test suite
-
-* Install dependencies `gradle build`
-* Following are the changes required in `gradle.build` -
-    * Add `compileOnly 'com.browserstack:browserstack-java-sdk:latest.release'` in dependencies
-    * Fetch Artifact Information and add `jvmArgs` property in tasks *SampleTest* and *SampleLocalTest* :
-  ```
-  def browserstackSDKArtifact = configurations.compileClasspath.resolvedConfiguration.resolvedArtifacts.find { it.name == 'browserstack-java-sdk' }
-  
-  task sampleTest(type: Test) {
-    useTestNG() {
-      dependsOn cleanTest
-      useDefaultListeners = true
-      suites "config/sample-test.testng.xml"
-      jvmArgs "-javaagent:${browserstackSDKArtifact.file}"
-    }
-  }
-  ```
 
 ## Notes
 * You can view your test results on the [BrowserStack Automate dashboard](https://www.browserstack.com/automate)
