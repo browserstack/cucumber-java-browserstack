@@ -26,6 +26,10 @@ tasks.withType(JavaCompile) {
     options.encoding = 'UTF-8'
 }
 
+tasks.withType(Test) {
+    systemProperties = System.properties
+}
+
 task sampleTest(type: Test) {
     systemProperty "cucumber.publish.quiet", "true"
     systemProperty "cucumber.features", "src/test/resources/features/test"
