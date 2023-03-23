@@ -10,8 +10,7 @@
 * Update `*.conf.js` files inside the `src/test/resources/conf/` directory to update desired capabilities.
 
 ## Running your tests
-* To run a single test, run `mvn test -P single`
-* To run parallel tests, run `mvn test -P parallel` 
+* To run tests, run `mvn test -P parallel` 
 * To run local tests, run `mvn test -P local`
 
 
