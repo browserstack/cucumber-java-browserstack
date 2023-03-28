@@ -43,6 +43,7 @@ public class Utility {
             bstackOptions = new JSONObject();
         bstackOptions.put("userName", username);
         bstackOptions.put("accessKey", accessKey);
+        bstackOptions.put("source", "cucumber-java:sample-selenium-4:v1.1");
         capabilities.put("bstack:options", bstackOptions);
         return capabilities;
     }
