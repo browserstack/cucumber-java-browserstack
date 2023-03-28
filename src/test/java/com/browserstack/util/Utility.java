@@ -40,7 +40,7 @@ public class Utility {
         }
         capabilities.put("browserstack.user", username);
         capabilities.put("browserstack.key", accessKey);
-        capabilities.put("browserstack.source", "cucumber-java:sample-selenium-3:v1.0");
+        capabilities.put("browserstack.source", "cucumber-java:sample-selenium-3:v1.1");
         return capabilities;
     }
 
