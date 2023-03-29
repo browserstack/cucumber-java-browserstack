@@ -30,7 +30,7 @@ import io.cucumber.testng.TestNGCucumberRunner;
 public class RunWebDriverCucumberTests {
 
     private TestNGCucumberRunner testNGCucumberRunner;
-    private Local local;
+    private static Local local;
     private static final ThreadLocal<ManagedWebDriver> threadLocalWebDriver = new ThreadLocal<>();
 
     @BeforeClass(alwaysRun = true)
@@ -40,6 +40,11 @@ public class RunWebDriverCucumberTests {
 
     private synchronized static void setThreadLocalWebDriver(ManagedWebDriver managedWebDriver) {
         threadLocalWebDriver.set(managedWebDriver);
+        if(Utility.isLocal(managedWebDriver) && local==null){
+            local = new Local();
+            Utility.startLocal(local, managedWebDriver);
+        }
+      
     }
 
     public synchronized static ManagedWebDriver getManagedWebDriver() {
@@ -48,10 +53,6 @@ public class RunWebDriverCucumberTests {
 
     @Test(groups = "cucumber", description = "Runs Cucumber Feature", dataProvider = "scenarios")
     public void feature(PickleWrapper pickleWrapper, FeatureWrapper featureWrapper, ManagedWebDriver managedWebDriver) {
-        if(Utility.isLocal(managedWebDriver) && local==null){
-            local = new Local();
-            Utility.startLocal(local, managedWebDriver);
-        }
         managedWebDriver.setTestName(pickleWrapper.getPickle().getName());
         setThreadLocalWebDriver(managedWebDriver);
         testNGCucumberRunner.runScenario(pickleWrapper.getPickle());

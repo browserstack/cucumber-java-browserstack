@@ -94,9 +94,6 @@
     <profiles>
         <profile>
             <id>single</id>
-            <activation>
-                <activeByDefault>true</activeByDefault>
-            </activation>
             <build>
                 <plugins>
                     <plugin>
@@ -122,6 +119,9 @@
         </profile>
         <profile>
             <id>parallel</id>
+            <activation>
+                <activeByDefault>true</activeByDefault>
+            </activation>
             <build>
                 <plugins>
                     <plugin>
