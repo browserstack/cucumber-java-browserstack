@@ -1,7 +1,7 @@
 # This job is to test different maven profiles in sdk branch again Pull Request raised
 # This workflow targets Java with Maven execution
 
-name: Cucumber SDK Test workflow for Maven on workflow_dispatch
+name: Java SDK Test workflow for Maven on workflow_dispatch
 
 on:
   workflow_dispatch:
@@ -19,7 +19,7 @@ jobs:
       matrix:
         java: [ '8', '11', '17' ]
         os: [ 'macos-latest', 'windows-latest', 'ubuntu-latest' ]
-    name: TestNG Repo ${{ matrix.Java }} - ${{ matrix.os }} Sample
+    name: Cucumber Repo ${{ matrix.Java }} - ${{ matrix.os }} Sample
     env:
       BROWSERSTACK_USERNAME: ${{ secrets.BROWSERSTACK_USERNAME }}
       BROWSERSTACK_ACCESS_KEY: ${{ secrets.BROWSERSTACK_ACCESS_KEY }}
