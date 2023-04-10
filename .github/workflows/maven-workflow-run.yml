@@ -1,7 +1,7 @@
 # This job is to test different maven profiles in sdk branch again Pull Request raised
 # This workflow targets Java with Maven execution
 
-name: TestNG SDK Test workflow for Maven on workflow_dispatch
+name: Cucumber SDK Test workflow for Maven on workflow_dispatch
 
 on:
   workflow_dispatch:
