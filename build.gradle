@@ -1,0 +1,57 @@
+plugins {
+    id 'java'
+}
+
+repositories {
+    mavenCentral()
+}
+
+dependencies {
+    implementation 'org.seleniumhq.selenium:selenium-java:4.1.4'
+    testImplementation 'io.cucumber:cucumber-java:7.3.4'
+    testImplementation 'io.cucumber:cucumber-testng:7.3.4'
+    testImplementation 'io.cucumber:cucumber-core:7.3.4'
+    compileOnly 'com.browserstack:browserstack-java-sdk:latest.release'
+}
+
+group = 'com.browserstack'
+version = '1.0-SNAPSHOT'
+description = 'cucumber-java-browserstack'
+sourceCompatibility = '1.8'
+targetCompatibility = '1.8'
+
+def browserstackSDKArtifact = configurations.compileClasspath.resolvedConfiguration.resolvedArtifacts.find { it.name == 'browserstack-java-sdk' }
+
+tasks.withType(JavaCompile) {
+    options.encoding = 'UTF-8'
+}
+
+tasks.withType(Test) {
+    systemProperties = System.properties
+}
+
+task sampleTest(type: Test) {
+    systemProperty "cucumber.publish.quiet", "true"
+    systemProperty "cucumber.features", "src/test/resources/features/test"
+    systemProperties System.getProperties()
+    useTestNG() {
+        dependsOn clean
+        useDefaultListeners = true
+        suites "src/test/resources/testng.xml"
+        jvmArgs "-javaagent:${browserstackSDKArtifact.file}"
+    }
+    scanForTestClasses = false
+}
+
+task sampleLocalTest(type: Test) {
+    systemProperty "cucumber.publish.quiet", "true"
+    systemProperty "cucumber.features", "src/test/resources/features/localtest"
+    systemProperties System.getProperties()
+    useTestNG() {
+        dependsOn clean
+        useDefaultListeners = true
+        suites "src/test/resources/testng.xml"
+        jvmArgs "-javaagent:${browserstackSDKArtifact.file}"
+    }
+    scanForTestClasses = false
+}

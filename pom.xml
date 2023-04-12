@@ -14,12 +14,12 @@
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <maven.compiler.source>1.8</maven.compiler.source>
         <maven.compiler.target>1.8</maven.compiler.target>
-        <cucumber.version>6.9.1</cucumber.version>
+        <cucumber.version>7.4.1</cucumber.version>
         <testng.version>7.4.0</testng.version>
-        <selenium-java.version>4.4.0</selenium-java.version>
+        <selenium-java.version>4.1.4</selenium-java.version>
         <browserstack-local-java.version>1.0.6</browserstack-local-java.version>
         <json-simple.version>1.1.1</json-simple.version>
-        <slf4j.version>1.7.30</slf4j.version>
+        <browserstack-java-sdk.version>LATEST</browserstack-java-sdk.version>
     </properties>
 
     <dependencies>
@@ -49,21 +49,16 @@
         </dependency>
         <dependency>
             <groupId>com.browserstack</groupId>
-            <artifactId>browserstack-local-java</artifactId>
-            <version>${browserstack-local-java.version}</version>
-        </dependency>
-
-        <dependency>
-            <groupId>com.googlecode.json-simple</groupId>
-            <artifactId>json-simple</artifactId>
-            <version>${json-simple.version}</version>
+            <artifactId>browserstack-java-sdk</artifactId>
+            <version>${browserstack-java-sdk.version}</version>
+            <scope>compile</scope>
         </dependency>
         <dependency>
-            <groupId>org.apache.commons</groupId>
-            <artifactId>commons-lang3</artifactId>
-            <version>3.11</version>
+            <groupId>io.qameta.allure</groupId>
+            <artifactId>allure-testng</artifactId>
+            <version>2.18.1</version>
+            <scope>test</scope>
         </dependency>
-
     </dependencies>
 
     <build>
@@ -77,11 +72,38 @@
                     <target>8</target>
                 </configuration>
             </plugin>
+            <plugin>
+                <artifactId>maven-dependency-plugin</artifactId>
+                <executions>
+                    <execution>
+                        <id>getClasspathFilenames</id>
+                        <goals>
+                            <goal>properties</goal>
+                        </goals>
+                    </execution>
+                </executions>
+            </plugin>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                    <artifactId>maven-surefire-plugin</artifactId>
+                    <version>3.0.0-M5</version>
+                    <configuration>
+                        <suiteXmlFiles>
+                            <suiteXmlFile>src/test/resources/testng.xml</suiteXmlFile>
+                        </suiteXmlFiles>
+                        <argLine>
+                            -javaagent:${com.browserstack:browserstack-java-sdk:jar}
+                        </argLine>
+                        <systemPropertyVariables>
+                            <cucumber.publish.quiet>true</cucumber.publish.quiet>
+                        </systemPropertyVariables>
+                    </configuration>
+            </plugin>
         </plugins>
     </build>
     <profiles>
         <profile>
-            <id>single</id>
+            <id>sample-test</id>
             <build>
                 <plugins>
                     <plugin>
@@ -93,10 +115,9 @@
                                 <suiteXmlFile>src/test/resources/testng.xml</suiteXmlFile>
                             </suiteXmlFiles>
                             <argLine>
-                                -Ddataproviderthreadcount=1
+                                -javaagent:${com.browserstack:browserstack-java-sdk:jar}
                             </argLine>
                             <systemPropertyVariables>
-                                <caps>src/test/resources/conf/single.conf.json</caps>
                                 <cucumber.publish.quiet>true</cucumber.publish.quiet>
                                 <cucumber.features>src/test/resources/features/test</cucumber.features>
                             </systemPropertyVariables>
@@ -106,10 +127,7 @@
             </build>
         </profile>
         <profile>
-            <id>parallel</id>
-            <activation>
-                <activeByDefault>true</activeByDefault>
-            </activation>
+            <id>sample-local-test</id>
             <build>
                 <plugins>
                     <plugin>
@@ -121,41 +139,9 @@
                                 <suiteXmlFile>src/test/resources/testng.xml</suiteXmlFile>
                             </suiteXmlFiles>
                             <argLine>
-                                -Ddataproviderthreadcount=4
+                                -javaagent:${com.browserstack:browserstack-java-sdk:jar}
                             </argLine>
                             <systemPropertyVariables>
-                                <caps>src/test/resources/conf/parallel.conf.json</caps>
-                                <cucumber.publish.quiet>true</cucumber.publish.quiet>
-                                <cucumber.features>src/test/resources/features/test</cucumber.features>
-                            </systemPropertyVariables>
-                            <properties>
-                                <property>
-                                    <name>parallel</name>
-                                    <value>methods</value>
-                                </property>
-                            </properties>
-                        </configuration>
-                    </plugin>
-                </plugins>
-            </build>
-        </profile>
-        <profile>
-            <id>local</id>
-            <build>
-                <plugins>
-                    <plugin>
-                        <groupId>org.apache.maven.plugins</groupId>
-                        <artifactId>maven-surefire-plugin</artifactId>
-                        <version>3.0.0-M5</version>
-                        <configuration>
-                            <suiteXmlFiles>
-                                <suiteXmlFile>src/test/resources/testng.xml</suiteXmlFile>
-                            </suiteXmlFiles>
-                            <argLine>
-                                -Ddataproviderthreadcount=1
-                            </argLine>
-                            <systemPropertyVariables>
-                                <caps>src/test/resources/conf/local.conf.json</caps>
                                 <cucumber.publish.quiet>true</cucumber.publish.quiet>
                                 <cucumber.features>src/test/resources/features/localtest</cucumber.features>
                             </systemPropertyVariables>
