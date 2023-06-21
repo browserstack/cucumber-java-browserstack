@@ -15,7 +15,7 @@
         <maven.compiler.source>1.8</maven.compiler.source>
         <maven.compiler.target>1.8</maven.compiler.target>
         <cucumber.version>7.4.1</cucumber.version>
-        <testng.version>7.4.0</testng.version>
+        <testng.version>7.5.1</testng.version>
         <selenium-java.version>4.1.4</selenium-java.version>
         <browserstack-local-java.version>1.0.6</browserstack-local-java.version>
         <json-simple.version>1.1.1</json-simple.version>
