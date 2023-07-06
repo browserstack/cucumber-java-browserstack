@@ -9,7 +9,6 @@ import org.junit.runner.RunWith;
         features = "src/test/resources/features/test",
         plugin = {
                 "pretty",
-                "html:reports/tests/cucumber/cucumber-pretty.html",
                 "junit:reports/tests/cucumber/junit/cucumber.xml",
                 "json:reports/tests/cucumber/json/cucumberTestReport.json"
         }

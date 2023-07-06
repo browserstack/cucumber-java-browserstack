@@ -49,12 +49,6 @@
             <scope>test</scope>
         </dependency>
         <dependency>
-            <groupId>io.qameta.allure</groupId>
-            <artifactId>allure-junit4</artifactId>
-            <version>2.20.1</version>
-            <scope>test</scope>
-        </dependency>
-        <dependency>
             <groupId>com.browserstack</groupId>
             <artifactId>browserstack-java-sdk</artifactId>
             <version>${browserstack-java-sdk.version}</version>
@@ -103,14 +97,7 @@
                     <configuration>
                         <argLine>
                             -javaagent:${com.browserstack:browserstack-java-sdk:jar}
-                            -javaagent:"${settings.localRepository}/org/aspectj/aspectjweaver/${aspectj.version}/aspectjweaver-${aspectj.version}.jar"
                         </argLine>
-                        <properties>
-                            <property>
-                                <name>listener</name>
-                                <value>io.qameta.allure.junit4.AllureJunit4</value>
-                            </property>
-                        </properties>
                         <systemPropertyVariables>
                             <cucumber.publish.quiet>true</cucumber.publish.quiet>
                         </systemPropertyVariables>
