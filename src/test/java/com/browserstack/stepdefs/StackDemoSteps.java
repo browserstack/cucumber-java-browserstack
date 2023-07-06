@@ -24,7 +24,7 @@ public class StackDemoSteps {
     public void setUp() throws MalformedURLException {
         MutableCapabilities capabilities = new MutableCapabilities();
         HashMap<String, String> bstackOptions = new HashMap<>();
-        bstackOptions.putIfAbsent("source", "cucumber-java:sample-sdk:v1.0");
+        bstackOptions.putIfAbsent("source", "cucumber-java:sample-master:v1.2");
         capabilities.setCapability("bstack:options", bstackOptions);
         driver = new RemoteWebDriver(
                 new URL("https://hub.browserstack.com/wd/hub"), capabilities);
