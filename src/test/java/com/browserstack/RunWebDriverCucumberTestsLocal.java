@@ -10,8 +10,8 @@ import static io.cucumber.junit.platform.engine.Constants.PLUGIN_PROPERTY_NAME;
 
 @Suite
 @IncludeEngines("cucumber")
-@SelectClasspathResource("features/test")
+@SelectClasspathResource("features/localtest")
 @ConfigurationParameter(key = GLUE_PROPERTY_NAME, value = "com.browserstack.stepdefs")
 @ConfigurationParameter(key = PLUGIN_PROPERTY_NAME, value = "pretty, json:reports/tests/cucumber/json/cucumberTestReport.json")
-public class RunWebDriverCucumberTests {
+public class RunWebDriverCucumberTestsLocal {
 }
