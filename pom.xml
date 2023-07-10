@@ -106,7 +106,7 @@
                             <cucumber.publish.quiet>true</cucumber.publish.quiet>
                         </systemPropertyVariables>
                         <includes>
-                            <include>**/RunWebDriverCucumberTests.java</include>
+                            <include>**/RunWebDriverCucumberSampleTests.java</include>
                         </includes>
                     </configuration>
             </plugin>
@@ -125,12 +125,11 @@
                             <argLine>
                                 -javaagent:${com.browserstack:browserstack-java-sdk:jar}
                             </argLine>
-                            <!-- <systemPropertyVariables>
+                            <systemPropertyVariables>
                                 <cucumber.publish.quiet>true</cucumber.publish.quiet>
-                                <cucumber.features>src/test/resources/features/test</cucumber.features>
-                            </systemPropertyVariables> -->
+                            </systemPropertyVariables>
                             <includes>
-                                <include>**/RunWebDriverCucumberTests.java</include>
+                                <include>**/RunWebDriverCucumberSampleTests.java</include>
                             </includes>
                         </configuration>
                     </plugin>
@@ -149,17 +148,11 @@
                             <argLine>
                                 -javaagent:${com.browserstack:browserstack-java-sdk:jar}
                             </argLine>
-                            <!-- <systemPropertyVariables>
+                            <systemPropertyVariables>
                                 <cucumber.publish.quiet>true</cucumber.publish.quiet>
-                                <cucumber.features>src/test/resources/features/localtest</cucumber.features>
-                            </systemPropertyVariables> -->
-                            <!-- <properties>
-                                <configurationParameters>
-                                    cucumber.features=src/test/resources/features/localtest
-                                </configurationParameters>
-                            </properties> -->
+                            </systemPropertyVariables>
                             <includes>
-                                <include>**/RunWebDriverCucumberTestsLocal.java</include>
+                                <include>**/RunWebDriverCucumberLocalTests.java</include>
                             </includes>
                         </configuration>
                     </plugin>
