@@ -14,20 +14,21 @@
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <maven.compiler.source>1.8</maven.compiler.source>
         <maven.compiler.target>1.8</maven.compiler.target>
-        <cucumber.version>7.4.1</cucumber.version>
+        <cucumber.version>7.8.1</cucumber.version>
         <testng.version>7.4.0</testng.version>
         <selenium-java.version>4.1.4</selenium-java.version>
         <browserstack-local-java.version>1.0.6</browserstack-local-java.version>
         <json-simple.version>1.1.1</json-simple.version>
         <browserstack-java-sdk.version>LATEST</browserstack-java-sdk.version>
+        <allure.cucumber5.version>2.20.0</allure.cucumber5.version>
+        <aspectj.version>1.8.0</aspectj.version>
     </properties>
 
     <dependencies>
         <dependency>
-            <groupId>org.testng</groupId>
-            <artifactId>testng</artifactId>
-            <version>${testng.version}</version>
-            <scope>test</scope>
+            <groupId>junit</groupId>
+            <artifactId>junit</artifactId>
+            <version>4.13.2</version>
         </dependency>
         <dependency>
             <groupId>io.cucumber</groupId>
@@ -37,7 +38,7 @@
         </dependency>
         <dependency>
             <groupId>io.cucumber</groupId>
-            <artifactId>cucumber-testng</artifactId>
+            <artifactId>cucumber-junit</artifactId>
             <version>${cucumber.version}</version>
             <scope>test</scope>
         </dependency>
@@ -52,12 +53,6 @@
             <artifactId>browserstack-java-sdk</artifactId>
             <version>${browserstack-java-sdk.version}</version>
             <scope>compile</scope>
-        </dependency>
-        <dependency>
-            <groupId>io.qameta.allure</groupId>
-            <artifactId>allure-testng</artifactId>
-            <version>2.18.1</version>
-            <scope>test</scope>
         </dependency>
     </dependencies>
 
@@ -87,10 +82,14 @@
                 <groupId>org.apache.maven.plugins</groupId>
                     <artifactId>maven-surefire-plugin</artifactId>
                     <version>3.0.0-M5</version>
+                    <dependencies>
+                        <dependency>
+                            <groupId>org.apache.maven.surefire</groupId>
+                            <artifactId>surefire-junit47</artifactId>
+                            <version>3.0.0-M5</version>
+                        </dependency>
+                    </dependencies>
                     <configuration>
-                        <suiteXmlFiles>
-                            <suiteXmlFile>src/test/resources/testng.xml</suiteXmlFile>
-                        </suiteXmlFiles>
                         <argLine>
                             -javaagent:${com.browserstack:browserstack-java-sdk:jar}
                         </argLine>
@@ -111,9 +110,6 @@
                         <artifactId>maven-surefire-plugin</artifactId>
                         <version>3.0.0-M5</version>
                         <configuration>
-                            <suiteXmlFiles>
-                                <suiteXmlFile>src/test/resources/testng.xml</suiteXmlFile>
-                            </suiteXmlFiles>
                             <argLine>
                                 -javaagent:${com.browserstack:browserstack-java-sdk:jar}
                             </argLine>
@@ -135,9 +131,6 @@
                         <artifactId>maven-surefire-plugin</artifactId>
                         <version>3.0.0-M5</version>
                         <configuration>
-                            <suiteXmlFiles>
-                                <suiteXmlFile>src/test/resources/testng.xml</suiteXmlFile>
-                            </suiteXmlFiles>
                             <argLine>
                                 -javaagent:${com.browserstack:browserstack-java-sdk:jar}
                             </argLine>
