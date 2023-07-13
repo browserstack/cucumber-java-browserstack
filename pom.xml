@@ -15,19 +15,30 @@
         <maven.compiler.source>1.8</maven.compiler.source>
         <maven.compiler.target>1.8</maven.compiler.target>
         <cucumber.version>7.4.1</cucumber.version>
-        <testng.version>7.4.0</testng.version>
         <selenium-java.version>4.1.4</selenium-java.version>
-        <browserstack-local-java.version>1.0.6</browserstack-local-java.version>
         <json-simple.version>1.1.1</json-simple.version>
         <browserstack-java-sdk.version>LATEST</browserstack-java-sdk.version>
+        <junit-jupiter.version>5.9.1</junit-jupiter.version>
+        <junit-platform-suite.version>1.9.3</junit-platform-suite.version>
     </properties>
 
     <dependencies>
         <dependency>
-            <groupId>org.testng</groupId>
-            <artifactId>testng</artifactId>
-            <version>${testng.version}</version>
+            <groupId>org.junit.jupiter</groupId>
+            <artifactId>junit-jupiter-api</artifactId>
+            <version>${junit-jupiter.version}</version>
             <scope>test</scope>
+        </dependency>
+        <dependency>
+            <groupId>org.junit.platform</groupId>
+            <artifactId>junit-platform-suite</artifactId>
+            <version>${junit-platform-suite.version}</version>
+            <scope>test</scope>
+        </dependency>
+        <dependency>
+            <groupId>org.junit.jupiter</groupId>
+            <artifactId>junit-jupiter-engine</artifactId>
+            <version>${junit-jupiter.version}</version>
         </dependency>
         <dependency>
             <groupId>io.cucumber</groupId>
@@ -37,7 +48,7 @@
         </dependency>
         <dependency>
             <groupId>io.cucumber</groupId>
-            <artifactId>cucumber-testng</artifactId>
+            <artifactId>cucumber-junit-platform-engine</artifactId>
             <version>${cucumber.version}</version>
             <scope>test</scope>
         </dependency>
@@ -88,15 +99,15 @@
                     <artifactId>maven-surefire-plugin</artifactId>
                     <version>3.0.0-M5</version>
                     <configuration>
-                        <suiteXmlFiles>
-                            <suiteXmlFile>src/test/resources/testng.xml</suiteXmlFile>
-                        </suiteXmlFiles>
                         <argLine>
                             -javaagent:${com.browserstack:browserstack-java-sdk:jar}
                         </argLine>
                         <systemPropertyVariables>
                             <cucumber.publish.quiet>true</cucumber.publish.quiet>
                         </systemPropertyVariables>
+                        <includes>
+                            <include>**/RunWebDriverCucumberSampleTests.java</include>
+                        </includes>
                     </configuration>
             </plugin>
         </plugins>
@@ -111,16 +122,15 @@
                         <artifactId>maven-surefire-plugin</artifactId>
                         <version>3.0.0-M5</version>
                         <configuration>
-                            <suiteXmlFiles>
-                                <suiteXmlFile>src/test/resources/testng.xml</suiteXmlFile>
-                            </suiteXmlFiles>
                             <argLine>
                                 -javaagent:${com.browserstack:browserstack-java-sdk:jar}
                             </argLine>
                             <systemPropertyVariables>
                                 <cucumber.publish.quiet>true</cucumber.publish.quiet>
-                                <cucumber.features>src/test/resources/features/test</cucumber.features>
                             </systemPropertyVariables>
+                            <includes>
+                                <include>**/RunWebDriverCucumberSampleTests.java</include>
+                            </includes>
                         </configuration>
                     </plugin>
                 </plugins>
@@ -135,16 +145,15 @@
                         <artifactId>maven-surefire-plugin</artifactId>
                         <version>3.0.0-M5</version>
                         <configuration>
-                            <suiteXmlFiles>
-                                <suiteXmlFile>src/test/resources/testng.xml</suiteXmlFile>
-                            </suiteXmlFiles>
                             <argLine>
                                 -javaagent:${com.browserstack:browserstack-java-sdk:jar}
                             </argLine>
                             <systemPropertyVariables>
                                 <cucumber.publish.quiet>true</cucumber.publish.quiet>
-                                <cucumber.features>src/test/resources/features/localtest</cucumber.features>
                             </systemPropertyVariables>
+                            <includes>
+                                <include>**/RunWebDriverCucumberLocalTests.java</include>
+                            </includes>
                         </configuration>
                     </plugin>
                 </plugins>
